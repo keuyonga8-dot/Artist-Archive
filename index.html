@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>Artist Archive v106</title>
+<title>Artist Archive v111</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=DM+Sans:wght@300;400;600;800&family=Noto+Serif+KR:wght@400;600;700;900&family=Black+Han+Sans&family=Nanum+Pen+Script&family=Nanum+Round+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
@@ -116,7 +116,7 @@ details.sb-card.data-section>summary{color:#8870b0;}
 
 /* ═══ 공통 페이지 ═══ */
 .page{
-  width:600px;min-height:980px;
+  width:600px;
   background:var(--bg);color:var(--txt);
   border:none;
   display:flex;flex-direction:column;
@@ -237,7 +237,9 @@ details.sb-card.data-section>summary{color:#8870b0;}
   border-top:1px solid var(--rule);
   flex-shrink:0;
 }
-.pages-row{display:flex;gap:0;}
+.pages-row{display:flex;gap:0;align-items:stretch;}
+
+/* 라이트박스 */
 
 /* ─── 오른쪽 페이지 ─── */
 .right-header{
@@ -295,7 +297,54 @@ details.sb-card.data-section>summary{color:#8870b0;}
 .gal-title-c{font-size:12px;font-weight:800;color:var(--txt);line-height:1.35;word-break:keep-all;}
 .gal-pair-text-c{font-size:11px;font-weight:600;color:var(--acc);}
 
-/* 카드 D — 페어 에디터 스타일 (이미지 + 하단 메타바) */
+.free-section-divider{
+  display:flex;align-items:center;gap:12px;
+  margin:28px 0 20px;
+  padding-top:28px;
+  border-top:1px solid var(--rule);
+}
+.free-section-divider span{
+  font-size:9px;font-weight:900;letter-spacing:.22em;
+  color:var(--acc);text-transform:uppercase;
+  white-space:nowrap;flex-shrink:0;
+}
+.free-section-divider::after{content:'';flex:1;height:1px;background:var(--rule);opacity:.6;}
+
+/* 구분선 스타일 D — 좌측 포인트 바 */
+#capture-wrapper.free-div-d .free-section-divider{border-top:none;padding-top:0;}
+#capture-wrapper.free-div-d .free-section-divider::before{content:'';width:3px;height:16px;background:var(--acc);border-radius:2px;flex-shrink:0;}
+#capture-wrapper.free-div-d .free-section-divider::after{display:none;}
+
+/* 구분선 스타일 B — 양쪽 점 + 선 */
+#capture-wrapper.free-div-b .free-section-divider{border-top:none;padding-top:0;justify-content:center;}
+#capture-wrapper.free-div-b .free-section-divider::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--acc);opacity:.5;flex-shrink:0;}
+#capture-wrapper.free-div-b .free-section-divider::after{display:none;}
+#capture-wrapper.free-div-b .free-section-divider .div-line-l,
+#capture-wrapper.free-div-b .free-section-divider .div-line-r{flex:1;height:1px;background:var(--rule);}
+
+/* 구분선 스타일 E — 그라데이션 선 */
+#capture-wrapper.free-div-e .free-section-divider{flex-direction:column;align-items:flex-start;gap:6px;border-top:none;padding-top:0;}
+#capture-wrapper.free-div-e .free-section-divider::after{width:100%;background:linear-gradient(to right,var(--acc),transparent);opacity:.35;height:1px;}
+
+/* 텍스트 전용 카드 — 가운데 정렬 */
+.gal-card-text{
+  border-radius:14px;overflow:hidden;
+  background:var(--box);border:1px solid var(--rule);
+  padding:18px;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;gap:6px;
+  min-height:80px;
+  width:100%;
+  transition:transform .2s,box-shadow .2s;
+}
+.gal-card-text:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(200,100,80,.1);}
+.gal-card-text-title{font-size:14px;font-weight:800;color:var(--txt);line-height:1.4;word-break:keep-all;}
+.gal-card-text-sub{font-size:12px;font-weight:600;color:var(--acc);line-height:1.5;}
+.cat-grid.mode-e .gal-card-a,.cat-grid.mode-e .gal-card-b,.cat-grid.mode-e .gal-card-c,.cat-grid.mode-e .gal-card-d{display:none;}
+#capture-wrapper.style-minimal .gal-card-text{border-radius:4px;}
+#capture-wrapper.style-rounded .gal-card-text{border-radius:22px;}
+#capture-wrapper.style-cute .gal-card-text{border-radius:24px;}
 .gal-card-d{border-radius:12px;overflow:hidden;background:#fff;border:1px solid var(--rule);display:flex;flex-direction:column;width:100%;transition:transform .2s,box-shadow .2s;box-shadow:0 2px 10px rgba(0,0,0,.07);}
 .gal-card-d:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.12);}
 .gal-img-d{width:100%;background:#e8e4de center/cover no-repeat;flex-shrink:0;}
@@ -420,9 +469,11 @@ details.sb-card.data-section>summary{color:#8870b0;}
 </head>
 <body>
 
+<!-- ══ 라이트박스 ══ -->
+
 <!-- ══ 사이드바 ══ -->
 <div class="sidebar tab-mode show-style">
-  <div class="sb-head"><h2>Artist Archive</h2><span>v106</span></div>
+  <div class="sb-head"><h2>Artist Archive</h2><span>v111</span></div>
   <div class="sb-mode-toggle" onclick="toggleTabMode()">
     <input type="checkbox" id="tab-mode-chk" checked>
     <span>탭으로 보기</span>
@@ -694,6 +745,14 @@ details.sb-card.data-section>summary{color:#8870b0;}
   <details class="sb-card tab-right free-section">
     <summary>📦 자유 섹션</summary>
     <div class="sb-body">
+      <div class="sb-label">구분선 스타일</div>
+      <div class="ab-toggle" id="free-div-toggle">
+        <button class="ab-btn on" onclick="setFreeDiv('e')">그라데이션</button>
+        <button class="ab-btn" onclick="setFreeDiv('b')">양쪽점</button>
+        <button class="ab-btn" onclick="setFreeDiv('d')">포인트바</button>
+      </div>
+      <div class="sb-label">섹션 구분 헤더명</div>
+      <input type="text" placeholder="구분 헤더명 (기본: EXTRA)" oninput="updateFreeHeader(this.value)">
       <div class="sb-label">섹션 목록</div>
       <div id="free-section-edit-list"></div>
       <div style="display:flex;gap:6px;">
@@ -715,6 +774,7 @@ details.sb-card.data-section>summary{color:#8870b0;}
         <button class="ab-btn on" onclick="setFreeMode('b')">B</button>
         <button class="ab-btn" onclick="setFreeMode('c')">C</button>
         <button class="ab-btn" onclick="setFreeMode('d')">D</button>
+        <button class="ab-btn" onclick="setFreeMode('e')">텍스트</button>
       </div>
       <div class="sb-label">카드 높이</div>
       <div class="slider-row">
@@ -742,7 +802,7 @@ details.sb-card.data-section>summary{color:#8870b0;}
     </div>
   </details>
 
-  <div style="text-align:center;font-size:9px;font-weight:700;color:var(--ss);opacity:.4;letter-spacing:2px;text-transform:uppercase;padding:4px 0 2px;">Archive Config · v106</div>
+  <div style="text-align:center;font-size:9px;font-weight:700;color:var(--ss);opacity:.4;letter-spacing:2px;text-transform:uppercase;padding:4px 0 2px;">Archive Config · v111</div>
   <button class="btn-save" onclick="save()"><span style="font-size:14px;">↓</span> PNG 저장</button>
 </div>
 
@@ -1035,7 +1095,9 @@ function imgStyle(item){
 function makeCardHTML(card,h,mode){
   const is=imgStyle(card);
   const pairLine=card.pair?`<div class="gal-pair-text-${mode}">${card.pair}</div>`:'';
-  if(mode==='a')return`<div class="gal-card-a" style="height:${h}px"><div class="gal-bg-a" id="bga-${card.id}" style="${is}"></div><div class="gal-text-a"><div class="gal-title-a">${card.t}</div>${pairLine}</div></div>`;
+  if(!card.src){
+    return`<div class="gal-card-text"><div class="gal-card-text-title">${card.t}</div>${card.pair?`<div class="gal-card-text-sub">${card.pair}</div>`:''}</div>`;
+  }
   if(mode==='b')return`<div class="gal-card-b" style="height:${h}px"><div class="gal-bg-b" id="bgb-${card.id}" style="${is}"></div><div class="gal-text-b"><div class="gal-title-b">${card.t}</div>${pairLine}</div></div>`;
   if(mode==='d'){
     const imgH=Math.round(h*0.88);
@@ -1059,8 +1121,8 @@ function addGal(){
   if(!t){alert('캐릭터명/페어명은 필수입니다!');return;}
   const catSel=document.getElementById('g-cat');const catVal=catSel?catSel.value:'';const selCat=(catVal===''||catVal===null)?-1:Number(catVal);
   if(editIdx===-1){
-    if(!tempImg){alert('이미지를 선택해주세요!');return;}
-    const nc={id:Date.now(),t,pair,src:tempImg,scale:100,posX:50,posY:50};
+    if(!t){alert('캐릭터명/페어명은 필수입니다!');return;}
+    const nc={id:Date.now(),t,pair,src:tempImg||'',scale:100,posX:50,posY:50};
     if(selCat>=0&&categories[selCat])categories[selCat].cards.push(nc);else gData.push(nc);
   } else {
     let card=null;
@@ -1096,7 +1158,7 @@ function updateCardById(prop,val,cardId){
   if(!card){for(const sec of freeSections){card=sec.cards.find(c=>c.id===cardId);if(card)break;}}
   if(!card)card=freeUncatCards.find(c=>c.id===cardId);
   if(!card)return;
-  card[prop]=Math.max(prop==='scale'?90:0,Number(val));
+  card[prop]=Math.max(prop==='scale'?50:0,Math.min(prop==='scale'?300:100,Number(val)));
   ['bga','bgb','bgc','bgd'].forEach(pfx=>{const el=document.getElementById(pfx+'-'+cardId);if(el){el.style.backgroundSize=card.scale<=100?'cover':card.scale+'%';el.style.backgroundPosition=card.posX+'% '+card.posY+'%';}});
   const sc=document.getElementById('sc-'+cardId);if(sc&&prop==='scale')sc.textContent=card.scale+'%';
 }
@@ -1115,9 +1177,30 @@ function renderCatEditor(){
   const list=document.getElementById('cat-edit-list');const sel=document.getElementById('g-cat');
   list.innerHTML='';sel.innerHTML='<option value="">── 카테고리 없이 ──</option>';
   categories.forEach((cat,i)=>{
-    list.innerHTML+=`<div class="edit-item"><span>${cat.name}${cat.sub?' · '+cat.sub:''} (${cat.cards.length})</span><div class="edit-btns"><button onclick="moveCat(${i},-1)">▲</button><button onclick="moveCat(${i},1)">▼</button><button class="del" onclick="deleteCategory(${i})">✕</button></div></div>`;
+    list.innerHTML+=`
+      <details style="background:#fff;border:1px solid var(--sl);border-radius:12px;overflow:hidden;margin-bottom:6px;">
+        <summary style="list-style:none;padding:8px 12px;cursor:pointer;display:flex;align-items:center;gap:8px;user-select:none;">
+          <span style="font-size:12px;font-weight:800;color:var(--sa);flex:1;">${cat.name}${cat.sub?' · '+cat.sub:''} (${cat.cards.length})</span>
+          <div class="edit-btns" onclick="event.preventDefault()">
+            <button onclick="event.preventDefault();moveCat(${i},-1)">▲</button>
+            <button onclick="event.preventDefault();moveCat(${i},1)">▼</button>
+            <button class="del" onclick="event.preventDefault();deleteCategory(${i})">✕</button>
+          </div>
+        </summary>
+        <div style="padding:8px 12px;border-top:1px solid var(--sl);display:flex;flex-direction:column;gap:6px;">
+          <input type="text" value="${cat.name}" placeholder="카테고리명" style="width:100%;font-size:12px;border:1px solid var(--sl);border-radius:8px;padding:6px 10px;background:#fffaf5;color:#332923;"
+            oninput="categories[${i}].name=this.value;updateCatSelect();renderAllGal();">
+          <input type="text" value="${cat.sub||''}" placeholder="부제 (선택)" style="width:100%;font-size:12px;border:1px solid var(--sl);border-radius:8px;padding:6px 10px;background:#fffaf5;color:#332923;"
+            oninput="categories[${i}].sub=this.value;renderAllGal();">
+        </div>
+      </details>`;
     sel.innerHTML+=`<option value="${i}">${cat.name}</option>`;
   });
+}
+function updateCatSelect(){
+  const sel=document.getElementById('g-cat');const cur=sel.value;
+  sel.innerHTML='<option value="">── 카테고리 없이 ──</option>';
+  categories.forEach((cat,i)=>{sel.innerHTML+=`<option value="${i}"${cur==i?' selected':''}>${cat.name}</option>`;});
 }
 function renderGalEditor(){
   const eRoot=document.getElementById('edit-gal-list');eRoot.innerHTML='';
@@ -1125,7 +1208,7 @@ function renderGalEditor(){
     return`<div class="img-ctrl" style="display:none;" id="ctrl-${card.id}">
       <div class="img-ctrl-head" onclick="toggleImgCtrl('ctrl-${card.id}')">📐 이미지 조절</div>
       <div class="img-ctrl-body">
-        <div class="img-ctrl-row"><span class="img-ctrl-label">크기</span><input type="range" min="90" max="200" value="${card.scale||100}" oninput="${fn}('scale',this.value,${card.id})"><span class="img-ctrl-num" id="sc-${card.id}">${card.scale||100}%</span></div>
+        <div class="img-ctrl-row"><span class="img-ctrl-label">크기</span><input type="range" min="50" max="300" value="${card.scale||100}" oninput="${fn}('scale',this.value,${card.id})"><span class="img-ctrl-num" id="sc-${card.id}">${card.scale||100}%</span></div>
         <div class="img-ctrl-row"><span class="img-ctrl-label">좌우</span><input type="range" min="0" max="100" value="${card.posX||50}" oninput="${fn}('posX',this.value,${card.id})"></div>
         <div class="img-ctrl-row"><span class="img-ctrl-label">상하</span><input type="range" min="0" max="100" value="${card.posY||50}" oninput="${fn}('posY',this.value,${card.id})"></div>
       </div></div>`;
@@ -1164,7 +1247,15 @@ function renderAllGal(){
 }
 
 /* ── 자유 섹션 ── */
-function setFreeMode(m){freeSectionMode=m;renderFreeSectionCards();document.querySelectorAll('#free-mode-toggle .ab-btn').forEach((b,i)=>b.classList.toggle('on',['b','c','d'][i]===m));}
+function setFreeMode(m){freeSectionMode=m;renderFreeSectionCards();document.querySelectorAll('#free-mode-toggle .ab-btn').forEach((b,i)=>b.classList.toggle('on',['b','c','d','e'][i]===m));}
+function updateFreeHeader(v){const el=document.getElementById('free-section-header-label');if(el)el.innerText=v.trim()||'EXTRA';}
+function setFreeDiv(s){
+  const r=document.getElementById('capture-wrapper');
+  ['free-div-b','free-div-d','free-div-e'].forEach(c=>r.classList.remove(c));
+  r.classList.add('free-div-'+s);
+  document.querySelectorAll('#free-div-toggle .ab-btn').forEach((b,i)=>b.classList.toggle('on',['e','b','d'][i]===s));
+  renderFreeSectionCards();
+}
 function setFreeCol(c){freeSectionCol=c;renderFreeSectionCards();document.querySelectorAll('#free-col-toggle .ab-btn').forEach((b,i)=>b.classList.toggle('on',i+1===c));}
 function setFreeCardHeight(h){freeSectionCardH=Number(h);document.getElementById('free-height-val').innerText=h+'px';renderFreeSectionCards();}
 function setFreeTempImg(input){if(!input.files[0])return;const r=new FileReader();r.onload=e=>{freeTempImg=e.target.result;document.getElementById('lbl-free-img').innerHTML='✅ 이미지 선택됨';};r.readAsDataURL(input.files[0]);}
@@ -1186,8 +1277,8 @@ function addFreeCard(){
   const t=(document.getElementById('free-card-t').value||'').trim();const pair=(document.getElementById('free-card-pair').value||'').trim();
   if(!t){alert('캐릭터명/페어명을 입력해주세요!');return;}
   if(freeEditCardIdx===-1){
-    if(!freeTempImg){alert('이미지를 선택해주세요!');return;}
-    const nc={id:Date.now(),t,pair,src:freeTempImg,posX:50,posY:50,scale:100};
+    if(!t){alert('캐릭터명/페어명을 입력해주세요!');return;}
+    const nc={id:Date.now(),t,pair,src:freeTempImg||'',posX:50,posY:50,scale:100};
     if(si>=0&&freeSections[si])freeSections[si].cards.push(nc);else freeUncatCards.push(nc);
   } else {
     let card;
@@ -1252,9 +1343,12 @@ function renderFreeSectionCards(){
   function cardHTML(card){
     const sz=(card.scale||100)<=100?'cover':(card.scale||100)+'%';
     const bp=`${card.posX||50}% ${card.posY||50}%`;
-    const bg=`background-image:url('${card.src}');background-size:${sz};background-position:${bp};`;
+    const bg=`background-image:url('${card.src||''}');background-size:${sz};background-position:${bp};`;
     const pairLine=card.pair?`<div class="gal-pair-text-${mode}">${card.pair}</div>`:'';
-    if(mode==='a')return`<div class="gal-card-a" style="height:${h}px"><div class="gal-bg-a" style="${bg}"></div><div class="gal-text-a"><div class="gal-title-a">${card.t}</div>${pairLine}</div></div>`;
+    if(mode==='e'){
+      return`<div class="gal-card-text"><div class="gal-card-text-title">${card.t}</div>${card.pair?`<div class="gal-card-text-sub">${card.pair}</div>`:''}</div>`;
+    }
+    if(!card.src)return`<div class="gal-card-text"><div class="gal-card-text-title">${card.t}</div>${card.pair?`<div class="gal-card-text-sub">${card.pair}</div>`:''}</div>`;
     if(mode==='b')return`<div class="gal-card-b" style="height:${h}px"><div class="gal-bg-b" style="${bg}"></div><div class="gal-text-b"><div class="gal-title-b">${card.t}</div>${pairLine}</div></div>`;
     const imgH=Math.round(h*0.88);
     if(mode==='d'){const chars=card.pair?`<span class="gal-meta-d-chars">${card.pair}</span>`:'';return`<div class="gal-card-d"><div class="gal-img-d" style="${bg};height:${imgH}px;"></div><div class="gal-meta-d"><span class="gal-meta-d-pair">${card.t}</span>${chars}</div></div>`;}
@@ -1262,7 +1356,11 @@ function renderFreeSectionCards(){
   }
   const uncatHTML=freeUncatCards.length?`<div class="cat-section"><div class="cat-grid mode-${mode} col-${col}">${freeUncatCards.map(cardHTML).join('')}</div></div>`:'';
   const sectHTML=freeSections.filter(s=>s.cards.length).map(s=>`<div class="cat-section"><div class="cat-label" id="fsh-${s.id}">${s.title}</div><div class="cat-grid mode-${mode} col-${col}">${s.cards.map(cardHTML).join('')}</div></div>`).join('');
-  container.innerHTML=uncatHTML+sectHTML;
+  const r=document.getElementById('capture-wrapper');
+  const isB=r&&r.classList.contains('free-div-b');
+  const divInner=isB?`<div class="div-line-l"></div><span id="free-section-header-label">EXTRA</span><div class="div-line-r"></div>`:`<span id="free-section-header-label">EXTRA</span>`;
+  const divider=`<div class="free-section-divider">${divInner}</div>`;
+  container.innerHTML=divider+uncatHTML+sectHTML;
 }
 
 /* ── Love 섹션 ── */
@@ -1310,10 +1408,44 @@ function initCardDrag(cardId,ci,idx){
   const getCard=()=>{if(ci>=0&&categories[ci])return categories[ci].cards[idx];return gData[idx];};
   [bga,bgb,bgc,bgd].forEach(bg=>{
     if(!bg)return;bg.style.cursor='grab';
-    bg.onmousedown=e=>{e.preventDefault();const card=getCard();if(!card)return;const bX=card.posX||50,bY=card.posY||50,sX=e.clientX,sY=e.clientY;document.body.style.cursor='grabbing';
-      const onMove=e2=>{card.posX=Math.max(0,Math.min(100,bX+(e2.clientX-sX)/bg.offsetWidth*100*-1));card.posY=Math.max(0,Math.min(100,bY+(e2.clientY-sY)/bg.offsetHeight*100*-1));const pos=card.posX+'% '+card.posY+'%';if(bga)bga.style.backgroundPosition=pos;if(bgb)bgb.style.backgroundPosition=pos;if(bgc)bgc.style.backgroundPosition=pos;if(bgd)bgd.style.backgroundPosition=pos;};
+    // 드래그 (이동)
+    bg.onmousedown=e=>{
+      e.preventDefault();const card=getCard();if(!card)return;
+      const bX=card.posX||50,bY=card.posY||50,sX=e.clientX,sY=e.clientY;
+      document.body.style.cursor='grabbing';
+      const onMove=e2=>{
+        card.posX=Math.max(0,Math.min(100,bX+(e2.clientX-sX)/bg.offsetWidth*100*-1));
+        card.posY=Math.max(0,Math.min(100,bY+(e2.clientY-sY)/bg.offsetHeight*100*-1));
+        const pos=card.posX+'% '+card.posY+'%';
+        if(bga)bga.style.backgroundPosition=pos;if(bgb)bgb.style.backgroundPosition=pos;
+        if(bgc)bgc.style.backgroundPosition=pos;if(bgd)bgd.style.backgroundPosition=pos;
+        syncCardSlider(cardId,card);
+      };
       const onUp=()=>{document.body.style.cursor='';document.removeEventListener('mousemove',onMove);document.removeEventListener('mouseup',onUp);};
-      document.addEventListener('mousemove',onMove);document.addEventListener('mouseup',onUp);};
+      document.addEventListener('mousemove',onMove);document.addEventListener('mouseup',onUp);
+    };
+    // 휠 줌 (확대/축소)
+    bg.addEventListener('wheel',e=>{
+      e.preventDefault();
+      const card=getCard();if(!card)return;
+      const delta=e.deltaY<0?1.1:0.92;
+      const newScale=Math.max(50,Math.min(300,(card.scale||100)*delta));
+      card.scale=newScale;
+      const sz=newScale<=100?'cover':newScale+'%';
+      [bga,bgb,bgc,bgd].forEach(el=>{if(el){el.style.backgroundSize=sz;}});
+      syncCardSlider(cardId,card);
+    },{passive:false});
+  });
+}
+
+function syncCardSlider(cardId,card){
+  const sc=document.getElementById('sc-'+cardId);
+  if(sc)sc.textContent=Math.round(card.scale||100)+'%';
+  const sliders=document.querySelectorAll(`[oninput*="updateCardById"][oninput*="${cardId}"]`);
+  sliders.forEach(sl=>{
+    if(sl.getAttribute('oninput').includes("'scale'"))sl.value=card.scale||100;
+    if(sl.getAttribute('oninput').includes("'posX'"))sl.value=card.posX||50;
+    if(sl.getAttribute('oninput').includes("'posY'"))sl.value=card.posY||50;
   });
 }
 function initInterestDrags(){
@@ -1395,7 +1527,7 @@ function applyState(state){
 function resetAll(){
   if(!confirm('전체 초기화할까요?'))return;
   categories=[];gData=[];extraPlats=[];customTokens=[];genreTokens=[];extraTends=[];interestData=[];freeSections=[];freeUncatCards=[];infoRows=[];radioState={farewell:'',crossgenre:''};
-  currentMode='a';currentCol=3;window.currentCardHeight=160;
+  currentMode='b';currentCol=3;window.currentCardHeight=160;
   document.getElementById('txt-name').innerText='이름';document.getElementById('txt-name').style.opacity='0.35';
   document.getElementById('txt-id').innerText='@id';document.getElementById('txt-id').style.opacity='0.35';
   document.getElementById('txt-bio').innerText='한줄소개...';document.getElementById('txt-bio').style.opacity='0.3';
@@ -1427,8 +1559,9 @@ function save(){
 }
 
 document.addEventListener('DOMContentLoaded',()=>{
-  setMode('a');setCol(3);
+  setMode('b');setCol(3);setFreeDiv('e');
 });
+
 </script>
 </body>
 </html>
